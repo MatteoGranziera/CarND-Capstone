@@ -39,7 +39,6 @@ class Controller(object):
         self.last_vel = None
 
     def control(self, current_vel, linear_velocity, angular_velocity, dbw_enable):
-        # TODO: Change the arg, kwarg list to suit your needs
         # Return throttle, brake, steer
         if not dbw_enable:
             self.throttle_controller.reset()
@@ -67,6 +66,8 @@ class Controller(object):
             decel = max(vel_error, self.decel_limit)
             brake = abs(decel)*self.vehicle_mass*self.wheel_radius
 
+        rospy.loginfo("throttle: %s | brake: %s | steering: %s",throttle, brake, steering)
+        
         return throttle, brake, steering
 
 
